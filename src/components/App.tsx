@@ -1,5 +1,6 @@
 import * as esbuild from "esbuild-wasm";
 import { useEffect, useRef, useState } from "react";
+import { fetchPlugin } from "../plugins/fetch-plugin";
 import { unpkgPathPlugin } from "../plugins/unpkg-path-plugin";
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
       entryPoints: ["index.js"],
       bundle: true,
       write: false,
-      plugins: [unpkgPathPlugin()],
+      plugins: [unpkgPathPlugin(), fetchPlugin(input)],
     });
     setCode(result.outputFiles[0].text);
   };
